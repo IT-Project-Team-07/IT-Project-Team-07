@@ -1,0 +1,53 @@
+  name: Deploy Terraform
+
+  on:
+    pull_request:
+      branches:
+        - Test-pipeline
+
+  jobs:
+    terraform:
+      runs-on: ubuntu-latest
+      
+        
+      steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Log in to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.9.8
+          terraform_wrapper: false
+
+      - name: Install Terragrunt
+        run: |
+          TERRAGRUNT_VERSION="v0.68.15"  # Specify the version you need
+          wget https://github.com/gruntwork-io/terragrunt/releases/download/${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 -O /usr/local/bin/terragrunt
+          chmod +x /usr/local/bin/terragrunt
+
+      - name: Modify startup.sh script
+        run: |
+          cd terragrunt/live/test/instance
+          sed -i 's|https://github.com/BramVerbeirenPXL/IT-Project-Team-07.git|https://${{ secrets.GITHUB_TOKEN }}@github.com/BramVerbeirenPXL/IT-Project-Team-07.git|' startup.sh
+        
+
+      - name: destroy Terraform
+        run: |
+          cd terragrunt/live
+          terragrunt run-all destroy --terragrunt-non-interactive
+
+      - name: init Terraform
+        run: |
+          cd terragrunt/live
+          terragrunt init
+
+      - name: apply Terraform
+        run: |
+          cd terragrunt/live
+          terragrunt run-all apply --terragrunt-non-interactive
