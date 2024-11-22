@@ -1,10 +1,11 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react-native';
+import { render, waitFor, act } from '@testing-library/react-native';
 import MobileMapView from '../components/MobileMapView';
 import * as Location from 'expo-location';
+import { Alert } from 'react-native';
 import sharedData from '../../shared/data';
 
-// Mock the Location module
+// Mock the Location module and Alert
 jest.mock('expo-location', () => ({
   requestForegroundPermissionsAsync: jest.fn(),
   getCurrentPositionAsync: jest.fn(),
@@ -19,14 +20,25 @@ const mockLocation = {
 };
 
 describe('MobileMapView', () => {
+  let alertSpy;
+
   beforeEach(() => {
     Location.requestForegroundPermissionsAsync.mockResolvedValue({ status: 'granted' });
     Location.getCurrentPositionAsync.mockResolvedValue(mockLocation);
+    alertSpy = jest.spyOn(Alert, 'alert').mockImplementation(() => {});
   });
 
-  it('renders the map correctly', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('renders the map correctly', async () => {
     const { getByTestId } = render(<MobileMapView />);
-    expect(getByTestId('map-view')).toBeTruthy();
+    await act(async () => {
+      await waitFor(() => {
+        expect(getByTestId('map-view')).toBeTruthy();
+      });
+    });
   });
 
   it('requests location permission', async () => {
@@ -36,15 +48,77 @@ describe('MobileMapView', () => {
 
   it('sets user location marker on map', async () => {
     const { getByTestId } = render(<MobileMapView />);
-    await waitFor(() => {
-      expect(getByTestId('your-location')).toBeTruthy();
+    await act(async () => {
+      await waitFor(() => {
+        expect(getByTestId('your-location')).toBeTruthy();
+      });
     });
   });
 
-  it('renders shared data markers', () => { 
+  it('renders shared data markers', async () => {
     const { getByTestId } = render(<MobileMapView />);
-    sharedData.forEach(tree => { 
-        expect(getByTestId(`marker-${tree.id}`)).toBeTruthy();
+    await act(async () => {
+      await waitFor(() => {
+        sharedData.forEach(tree => {
+          expect(getByTestId(`marker-${tree.id}`)).toBeTruthy();
         });
+      });
     });
+  });
+
+  it('shows alert when location permission is denied', async () => {
+    Location.requestForegroundPermissionsAsync.mockResolvedValueOnce({ status: 'denied' });
+
+    const { getByTestId } = render(<MobileMapView />);
+    await act(async () => {
+      await waitFor(() => {
+        expect(alertSpy).toHaveBeenCalledWith(
+          'Permission Denied',
+          'We need access to your location to show it on the map.'
+        );
+      });
+    });
+  });
+
+  it('user location marker reflects the user location accurately', async () => {
+    const { getByTestId } = render(<MobileMapView />);
+    await act(async () => {
+      await waitFor(() => {
+        const userMarker = getByTestId('your-location');
+        expect(userMarker.props.coordinate.latitude).toBeCloseTo(mockLocation.coords.latitude, 5);
+        expect(userMarker.props.coordinate.longitude).toBeCloseTo(mockLocation.coords.longitude, 5);
+      });
+    });
+  });
+
+  it('sets user location state when user location is obtained', async () => {
+    Location.requestForegroundPermissionsAsync.mockResolvedValueOnce({ status: 'granted' });
+    Location.getCurrentPositionAsync.mockResolvedValueOnce({
+      coords: {
+        latitude: 50.8503,
+        longitude: 4.3517,
+      },
+    });
+
+    const { getByTestId } = render(<MobileMapView />);
+    await act(async () => {
+      await waitFor(() => {
+        const userLocationMarker = getByTestId('your-location');
+        expect(userLocationMarker.props.coordinate.latitude).toBe(50.8503);
+        expect(userLocationMarker.props.coordinate.longitude).toBe(4.3517);
+      });
+    });
+  });
+
+  it('does not set user location state when user location is null', async () => {
+    Location.requestForegroundPermissionsAsync.mockResolvedValueOnce({ status: 'granted' });
+    Location.getCurrentPositionAsync.mockResolvedValueOnce(null);
+
+    const { getByTestId } = render(<MobileMapView />);
+    await act(async () => {
+      await waitFor(() => {
+        expect(() => getByTestId('your-location')).toThrow('Unable to find an element with testID: your-location');
+      });
+    });
+  });
 });
