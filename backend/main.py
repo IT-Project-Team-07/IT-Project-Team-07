@@ -7,12 +7,9 @@ from jose import JWTError, jwt
 from datetime import datetime, timedelta, timezone
 from passlib.context import CryptContext
 from models import User, RevokedToken
-from database import SessionLocal, get_db
+from database import get_db
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-
-
-
 
 app = FastAPI()
 

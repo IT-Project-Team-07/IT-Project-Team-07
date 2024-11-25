@@ -25,7 +25,7 @@ const Navbar = () => {
           setIsAuthenticated(false);
         }
       } catch (error) {
-        console.error("Er is een fout opgetreden bij het verifiëren van de token:", error);
+        console.error("Er is een fout opgetreden bij het verifiëren va  n de token:", error);
         setIsAuthenticated(false);
       }
     };
