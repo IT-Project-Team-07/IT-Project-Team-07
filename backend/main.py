@@ -11,9 +11,6 @@ from database import SessionLocal, get_db
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
-
-
-
 app = FastAPI()
 
 load_dotenv()

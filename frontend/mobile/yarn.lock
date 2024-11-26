@@ -784,6 +784,13 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.25.9"
 
+"@babel/plugin-transform-object-assign@^7.16.7":
+  version "7.25.9"
+  resolved "https://registry.npmjs.org/@babel/plugin-transform-object-assign/-/plugin-transform-object-assign-7.25.9.tgz"
+  integrity sha512-I/Vl1aQnPsrrn837oLbo+VQtkNcjuuiATqwmuweg4fTauwHHQoxyjmjjOVKyO8OaTxgqYTKW3LuQsykXjDf5Ag==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.25.9"
+
 "@babel/plugin-transform-object-rest-spread@^7.25.9":
   version "7.25.9"
   resolved "https://registry.npmjs.org/@babel/plugin-transform-object-rest-spread/-/plugin-transform-object-rest-spread-7.25.9.tgz"
@@ -1112,7 +1119,7 @@
     "@babel/plugin-transform-react-jsx-development" "^7.25.9"
     "@babel/plugin-transform-react-pure-annotations" "^7.25.9"
 
-"@babel/preset-typescript@^7.13.0":
+"@babel/preset-typescript@^7.13.0", "@babel/preset-typescript@^7.16.7":
   version "7.26.0"
   resolved "https://registry.npmjs.org/@babel/preset-typescript/-/preset-typescript-7.26.0.tgz"
   integrity sha512-NMk1IGZ5I/oHhoXEElcm+xUnL/szL6xflkFZmoEU9xj1qSJXpiS7rsspYo92B4DRCDvZn2erT5LdsCeXAKNCkg==
@@ -2042,6 +2049,11 @@
     prompts "^2.4.0"
     semver "^6.3.0"
 
+"@react-native-community/masked-view@^0.1.11":
+  version "0.1.11"
+  resolved "https://registry.npmjs.org/@react-native-community/masked-view/-/masked-view-0.1.11.tgz"
+  integrity sha512-rQfMIGSR/1r/SyN87+VD8xHHzDYeHaJq6elOSCAD+0iLagXkSI2pfA0LmSXP21uw5i3em7GkkRjfJ8wpqWXZNw==
+
 "@react-native/assets@1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@react-native/assets/-/assets-1.0.0.tgz"
@@ -2056,6 +2068,15 @@
   version "2.0.0"
   resolved "https://registry.npmjs.org/@react-native/polyfills/-/polyfills-2.0.0.tgz"
   integrity sha512-K0aGNn1TjalKj+65D7ycc1//H9roAQ51GJVk5ZJQFb2teECGmzd86bYDC0aYdbRf7gtovescq4Zt6FR0tgXiHQ==
+
+"@react-navigation/bottom-tabs@^6.6.1":
+  version "6.6.1"
+  resolved "https://registry.npmjs.org/@react-navigation/bottom-tabs/-/bottom-tabs-6.6.1.tgz"
+  integrity sha512-9oD4cypEBjPuaMiu9tevWGiQ4w/d6l3HNhcJ1IjXZ24xvYDSs0mqjUcdt8SWUolCvRrYc/DmNBLlT83bk0bHTw==
+  dependencies:
+    "@react-navigation/elements" "^1.3.31"
+    color "^4.2.3"
+    warn-once "^0.1.0"
 
 "@react-navigation/core@^6.4.17":
   version "6.4.17"
@@ -2200,7 +2221,7 @@
   dependencies:
     "@babel/types" "^7.20.7"
 
-"@types/geojson@^7946.0.13":
+"@types/geojson@^7946.0.8":
   version "7946.0.14"
   resolved "https://registry.npmjs.org/@types/geojson/-/geojson-7946.0.14.tgz"
   integrity sha512-WCfD5Ht3ZesJUsONdhvm84dmzWOiOzOAqOncN0++w0lBw1o8OuDNJF2McvvCef/yBqb/HYRahp1BYtODFQ8bRg==
@@ -3260,6 +3281,11 @@ content-type@~1.0.5:
   resolved "https://registry.npmjs.org/content-type/-/content-type-1.0.5.tgz"
   integrity sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==
 
+convert-source-map@^1.7.0:
+  version "1.9.0"
+  resolved "https://registry.npmjs.org/convert-source-map/-/convert-source-map-1.9.0.tgz"
+  integrity sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==
+
 convert-source-map@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/convert-source-map/-/convert-source-map-2.0.0.tgz"
@@ -3316,9 +3342,9 @@ cross-fetch@^3.1.5:
     node-fetch "^2.6.12"
 
 cross-spawn@^6.0.0, cross-spawn@^6.0.5:
-  version "6.0.5"
-  resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-6.0.5.tgz"
-  integrity sha512-eTVLrBSt7fjbDygz805pMnstIs2VTBNkRm0qxZd+M7A5XDdxVRWO5MxGBXZhjY4cqLYLdtrGqRf8mBPmzwSpWQ==
+  version "6.0.6"
+  resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-6.0.6.tgz"
+  integrity sha512-VqCUuhcd1iB+dsv8gxPttb5iZh/D0iubSP21g36KXdEuf6I5JiioesUVjpCdHV9MZRUfVFlvwtIUyPfxo5trtw==
   dependencies:
     nice-try "^1.0.4"
     path-key "^2.0.1"
@@ -3327,18 +3353,18 @@ cross-spawn@^6.0.0, cross-spawn@^6.0.5:
     which "^1.2.9"
 
 cross-spawn@^7.0.0:
-  version "7.0.3"
-  resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.3.tgz"
-  integrity sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==
+  version "7.0.6"
+  resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.6.tgz"
+  integrity sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==
   dependencies:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
 
 cross-spawn@^7.0.3:
-  version "7.0.3"
-  resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.3.tgz"
-  integrity sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==
+  version "7.0.6"
+  resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.6.tgz"
+  integrity sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==
   dependencies:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
@@ -4274,11 +4300,6 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
-
-fsevents@^2.3.2:
-  version "2.3.3"
-  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
-  integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
 function-bind@^1.1.2:
   version "1.1.2"
@@ -5756,6 +5777,11 @@ lodash.debounce@^4.0.8:
   resolved "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
   integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
 
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.npmjs.org/lodash.isequal/-/lodash.isequal-4.5.0.tgz"
+  integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
+
 lodash.throttle@^4.1.1:
   version "4.1.1"
   resolved "https://registry.npmjs.org/lodash.throttle/-/lodash.throttle-4.1.1.tgz"
@@ -6607,6 +6633,8 @@ mkdirp@^1.0.4:
   version "1.0.0"
   resolved "file:"
   dependencies:
+    "@react-native-community/masked-view" "^0.1.11"
+    "@react-navigation/bottom-tabs" "^6.6.1"
     "@react-navigation/native" "^6.1.18"
     "@react-navigation/stack" "^6.4.1"
     expo "~48.0.0"
@@ -6616,7 +6644,11 @@ mkdirp@^1.0.4:
     react "^18.2.0"
     react-dom "18.2.0"
     react-native "^0.71.14"
-    react-native-maps "^1.18.2"
+    react-native-gesture-handler "^2.21.2"
+    react-native-maps "^1.20.1"
+    react-native-reanimated "^3.16.2"
+    react-native-safe-area-context "^4.14.0"
+    react-native-screens "^4.3.0"
     react-native-web "0.18.10"
 
 ms@^2.1.1, ms@^2.1.3, ms@2.1.3:
@@ -7378,14 +7410,15 @@ react-native-codegen@^0.71.6:
     jscodeshift "^0.14.0"
     nullthrows "^1.1.1"
 
-"react-native-gesture-handler@>= 1.0.0":
-  version "2.20.2"
-  resolved "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.20.2.tgz"
-  integrity sha512-HqzFpFczV4qCnwKlvSAvpzEXisL+Z9fsR08YV5LfJDkzuArMhBu2sOoSPUF/K62PCoAb+ObGlTC83TKHfUd0vg==
+"react-native-gesture-handler@>= 1.0.0", react-native-gesture-handler@~2.9.0:
+  version "2.9.0"
+  resolved "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.9.0.tgz"
+  integrity sha512-a0BcH3Qb1tgVqUutc6d3VuWQkI1AM3+fJx8dkxzZs9t06qA27QgURYFoklpabuWpsUTzuKRpxleykp25E8m7tg==
   dependencies:
     "@egjs/hammerjs" "^2.0.17"
     hoist-non-react-statics "^3.3.0"
     invariant "^2.2.4"
+    lodash "^4.17.21"
     prop-types "^15.7.2"
 
 react-native-gradle-plugin@^0.71.19:
@@ -7393,22 +7426,35 @@ react-native-gradle-plugin@^0.71.19:
   resolved "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.19.tgz"
   integrity sha512-1dVk9NwhoyKHCSxcrM6vY6cxmojeATsBobDicX0ZKr7DgUF2cBQRTKsimQFvzH8XhOVXyH8p4HyDSZNIFI8OlQ==
 
-react-native-maps@^1.18.2:
-  version "1.18.2"
-  resolved "https://registry.npmjs.org/react-native-maps/-/react-native-maps-1.18.2.tgz"
-  integrity sha512-HWkYIfasEGmnYmfBVbAYVVScOeZbIe+tI19pI/3oQ9GkY0px7hvCimjzuh0Y6GTFn8WHYk8qK5fmkmOKTpLy5A==
+react-native-maps@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.npmjs.org/react-native-maps/-/react-native-maps-1.3.2.tgz"
+  integrity sha512-NB7HGRZOgxxXCWzrhIVucx/bsrEWANvk3DLci1ov4P9MQnEVQYQCCkTxsnaEvO191GeBOCRDyYn6jckqbfMtmg==
   dependencies:
-    "@types/geojson" "^7946.0.13"
+    "@types/geojson" "^7946.0.8"
 
-"react-native-safe-area-context@>= 3.0.0":
-  version "4.14.0"
-  resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.14.0.tgz"
-  integrity sha512-/SyYpCulWQOnnXhRq6wepkhoyQMowHm1ptDyRz20s+YS/R9mbd+mK+jFyFCyXFJn8jp7vFl43VUCgspuOiEbwA==
+react-native-reanimated@~2.14.4:
+  version "2.14.4"
+  resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-2.14.4.tgz"
+  integrity sha512-DquSbl7P8j4SAmc+kRdd75Ianm8G+IYQ9T4AQ6lrpLVeDkhZmjWI0wkutKWnp6L7c5XNVUrFDUf69dwETLCItQ==
+  dependencies:
+    "@babel/plugin-transform-object-assign" "^7.16.7"
+    "@babel/preset-typescript" "^7.16.7"
+    convert-source-map "^1.7.0"
+    invariant "^2.2.4"
+    lodash.isequal "^4.5.0"
+    setimmediate "^1.0.5"
+    string-hash-64 "^1.0.3"
 
-"react-native-screens@>= 3.0.0":
-  version "3.35.0"
-  resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.35.0.tgz"
-  integrity sha512-rmkqb/M/SQIrXwygk6pXcOhgHltYAhidf1WceO7ujAxkr6XtwmgFyd1HIztsrJa568GrAuwPdQ11I7TpVk+XsA==
+react-native-safe-area-context@^4.5.0, "react-native-safe-area-context@>= 3.0.0":
+  version "4.5.0"
+  resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.5.0.tgz"
+  integrity sha512-0WORnk9SkREGUg2V7jHZbuN5x4vcxj/1B0QOcXJjdYWrzZHgLcUzYWWIUecUPJh747Mwjt/42RZDOaFn3L8kPQ==
+
+"react-native-screens@>= 3.0.0", react-native-screens@~3.20.0:
+  version "3.20.0"
+  resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.20.0.tgz"
+  integrity sha512-joWUKWAVHxymP3mL9gYApFHAsbd9L6ZcmpoZa6Sl3W/82bvvNVMqcfP7MeNqVCg73qZ8yL4fW+J/syusHleUgg==
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
@@ -7426,7 +7472,7 @@ react-native-maps@^1.18.2:
     postcss-value-parser "^4.2.0"
     styleq "^0.1.2"
 
-react-native@*, react-native@^0.71.14, "react-native@>= 0.64.3", react-native@>=0.59:
+react-native@*, react-native@^0.71.14, "react-native@>= 0.64.3", react-native@>=0.57, react-native@>=0.59:
   version "0.71.14"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.71.14.tgz"
   integrity sha512-7uhzas8aKpU2EARhlONt7yiclh+7PXEOJk469ewpQyId8Owq5WNtZvQm/z3k4mHUriMeQ37vgSGkOInSKcCazw==
@@ -7489,7 +7535,7 @@ react-test-renderer@>=16.0.0, react-test-renderer@18.2.0:
     react-shallow-renderer "^16.15.0"
     scheduler "^0.23.0"
 
-react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0", react@^18.2.0, "react@>= 17.0.1", react@>=16.0.0, react@>=16.8, react@>=17.0.0, react@18.2.0:
+react@*, "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0", react@^18.2.0, "react@>= 17.0.1", react@>=16.0, react@>=16.0.0, react@>=16.8, react@>=17.0.0, react@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
@@ -8141,6 +8187,11 @@ string_decoder@^1.1.1, string_decoder@~1.1.1:
   integrity sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==
   dependencies:
     safe-buffer "~5.1.0"
+
+string-hash-64@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/string-hash-64/-/string-hash-64-1.0.3.tgz"
+  integrity sha512-D5OKWKvDhyVWWn2x5Y9b+37NUllks34q1dCDhk/vYcso9fmhs+Tl3KR/gE4v5UNj2UA35cnX4KdVVGkG1deKqw==
 
 string-length@^4.0.1:
   version "4.0.2"

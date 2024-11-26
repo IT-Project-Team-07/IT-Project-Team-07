@@ -14,7 +14,9 @@
     "react-native-maps": "^1.18.2",
     "react-native-web": "^0.19.13",
     "react-router-dom": "^6.27.0",
-    "web-vitals": "^2.1.4"
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4",
+    "webapp": "file:"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
@@ -34,7 +36,9 @@
     "jest-watch-typeahead": "^2.2.2",
     "react-app-rewire-babel-loader": "^0.1.1",
     "react-app-rewired": "^2.2.1",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "leaflet": "^1.9.4",
+    "react-testing-library": "^8.0.1"
   },
   "scripts": {
     "start": "react-app-rewired start",

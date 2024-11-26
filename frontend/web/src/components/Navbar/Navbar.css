@@ -2,7 +2,7 @@ nav {
     background: rgb(127, 178, 65);
     background: linear-gradient(140deg, rgba(127, 178, 65, 1) 0%, rgba(54, 76, 28, 1) 100%);
     font-family: 'Jost', sans-serif;
-
+    display: block;
 }
 
 .nav-text-button {

@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import data from '../../../shared/data';
+import React, { useState } from 'react';
+import { MapContainer, TileLayer } from 'react-leaflet';
+import data from '../../../../shared/data';
 import 'leaflet/dist/leaflet.css';
+import Navbar from '../Navbar/Navbar';
+import "./WebMapView.css";
 import { useNavigate } from 'react-router-dom';
-import L from 'leaflet';
-import treeLogo from '../../../shared/images/tree-icon.png'
-import Navbar from './Navbar/Navbar';
+import TreeDetail from '../TreeDetail/TreeDetail';
+import DynamicMarker from '../DynamicMarker/DynamicMarker';
 
-const treeIcon = L.icon({
-    iconUrl: treeLogo,
-    iconSize: [40, 40],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32]
-});
+
 const layers = [
     {
         name: 'Standaard',
@@ -140,6 +136,9 @@ const MapView = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [activeLayer, setActiveLayer] = useState(layers[0]);
     const navigate = useNavigate();
+    const [center] = useState([50.95306, 5.352692]);
+    const [zoom] = useState(16);
+    const [selectedTree, setSelectedTree] = useState(null);
     useEffect(() => {
         const fetchTrees = async () => {
           const fetchedTrees = await data.getTrees();
@@ -170,24 +169,38 @@ const MapView = () => {
         verifyToken();
         fetchTrees();
       }, []);
+    const handleTreeSelect = (tree) => {
+        setSelectedTree(tree);
+    };
+
+    const handleCloseDetail = () => {
+        setSelectedTree(null);
+    };
+
     return (
-        <div style={{ height: '100vh', width: '100%', backgroundColor: "#f0eee4" }}>
+        <div className="layout">
             <Navbar />
-            <MapContainer data-testid="map-container"
-                center={[50.95306, 5.352692]} 
-                zoom={16} 
-                style={{ height: "85vh", margin: "10px", border: "4px solid #b2adad", borderRadius: "20px", zIndex: "0" }}
-            >
-                <LayerControl activeLayer={activeLayer} setActiveLayer={setActiveLayer} />
-                <TileLayer data-testid="tile-layer" url={activeLayer.url} attribution={activeLayer.attribution} />
-                {trees.map(tree => (
-                    <Marker data-testid="marker" key={tree.id} position={[tree.latitude, tree.longitude]} icon={treeIcon}>
-                        <Popup data-testid="popup">
-                            <strong>{tree.title}</strong><br />{tree.description}
-                        </Popup>
-                    </Marker>
-                ))}
-            </MapContainer>
+            <div className={`map-container ${selectedTree ? 'map-container-selected' : ''}`}>
+                <div className="map-area">
+                    <MapContainer
+                        center={center}
+                        zoom={zoom}
+                        className="leaflet-map"
+                    >
+                        <LayerControl activeLayer={activeLayer} setActiveLayer={setActiveLayer} />
+                        <TileLayer url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png" />
+                        {trees.map((tree) => (
+                            <DynamicMarker
+                                key={tree.id}
+                                tree={tree}
+                                isSelected={selectedTree?.id === tree.id}
+                                onTreeSelect={handleTreeSelect}
+                            />
+                        ))}
+                    </MapContainer>
+                </div>
+                {selectedTree && <TreeDetail selectedTree={selectedTree} onClose={handleCloseDetail} />}
+            </div>
         </div>
     );
 };

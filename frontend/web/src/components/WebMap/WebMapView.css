@@ -1,0 +1,26 @@
+.layout {
+    background-color: #F0EEE4;
+    height: 100vh;
+}
+
+.map-container {
+    display: flex;
+}
+
+.map-container-selected .map-area {
+    flex: 70%;
+    transition: flex 0.3s;
+}
+
+.map-area {
+    flex: 100%;
+    transition: flex 0.3s;
+}
+
+.leaflet-map {
+    height: 85vh;
+    margin: 10px;
+    border: 4px solid #b2adad;
+    border-radius: 20px;
+    z-index: 0;
+}

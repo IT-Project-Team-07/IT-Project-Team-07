@@ -1,14 +1,20 @@
 import React from 'react';
-import { render, waitFor, act } from '@testing-library/react-native';
+import { render, fireEvent, waitFor, act } from '@testing-library/react-native';
 import MobileMapView from '../components/MobileMapView';
 import * as Location from 'expo-location';
 import { Alert } from 'react-native';
 import sharedData from '../../shared/data';
+import { useNavigation } from '@react-navigation/native';
 
 // Mock the Location module and Alert
 jest.mock('expo-location', () => ({
   requestForegroundPermissionsAsync: jest.fn(),
   getCurrentPositionAsync: jest.fn(),
+}));
+
+// Mock useNavigation
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: jest.fn(),
 }));
 
 // Mock data for user location
@@ -18,6 +24,12 @@ const mockLocation = {
     longitude: 4.3517,
   },
 };
+
+// Mock navigation.navigate
+const mockNavigate = jest.fn();
+useNavigation.mockReturnValue({
+  navigate: mockNavigate,
+});
 
 describe('MobileMapView', () => {
   let alertSpy;
@@ -69,7 +81,7 @@ describe('MobileMapView', () => {
   it('shows alert when location permission is denied', async () => {
     Location.requestForegroundPermissionsAsync.mockResolvedValueOnce({ status: 'denied' });
 
-    const { getByTestId } = render(<MobileMapView />);
+    render(<MobileMapView />);
     await act(async () => {
       await waitFor(() => {
         expect(alertSpy).toHaveBeenCalledWith(
@@ -114,10 +126,22 @@ describe('MobileMapView', () => {
     Location.requestForegroundPermissionsAsync.mockResolvedValueOnce({ status: 'granted' });
     Location.getCurrentPositionAsync.mockResolvedValueOnce(null);
 
+    const { queryByTestId } = render(<MobileMapView />);
+    await act(async () => {
+      await waitFor(() => {
+        expect(queryByTestId('your-location')).toBeNull();
+      });
+    });
+  });
+
+  it('navigates to TreeDetails view when Callout is pressed', async () => {
     const { getByTestId } = render(<MobileMapView />);
     await act(async () => {
       await waitFor(() => {
-        expect(() => getByTestId('your-location')).toThrow('Unable to find an element with testID: your-location');
+        const treeId = sharedData[0].id;
+        const callout = getByTestId(`callout=${treeId}`);
+        fireEvent.press(callout);
+        expect(mockNavigate).toHaveBeenCalledWith('TreeDetails', { tree: sharedData[0] });
       });
     });
   });

@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import WebMap from './components/WebMapView';
+import WebMap from './components/WebMap/WebMapView';
 import Login from './components/Login/LoginView';
 import UploadView from './components/UploadView';
 import "@fontsource/jost";
