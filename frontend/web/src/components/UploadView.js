@@ -5,10 +5,9 @@ import Navbar from './Navbar/Navbar';
 
 function UploadView() {
   const [fileContent, setFileContent] = useState(null);
-  const [error, setError] = useState(null);
+  const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
-
-
+  
   useEffect(() => {
     const verifyToken = async () => {
       const token = sessionStorage.getItem("token");
@@ -36,65 +35,85 @@ function UploadView() {
     verifyToken();
   }, [navigate]);
 
-  // Functie om bestand te verwerken wanneer het geselecteerd wordt
+  const validateArray = (array) => {
+
+  }
+
   const handleFile = (file) => {
+    setErrors([]);
     if (file && file.type === 'application/json') {
       const reader = new FileReader();
       reader.onload = (event) => {
         try {
           const response = JSON.parse(event.target.result);
           if (Array.isArray(response)) {
-            const validTrees = response.filter(tree => {
-              return (
-                tree.name &&
-                tree.position &&
-                Array.isArray(tree.position) &&
-                tree.position.length === 2 &&
-                typeof tree.position[0] === 'number' &&
-                typeof tree.position[1] === 'number'
-              );
+            let newErrors = [];
+            const validTrees = response.filter((tree, index) => {
+              const treeErrors = [];
+              
+              if (!tree.name) {
+                treeErrors.push(`Boom met index ${index}: Naam ontbreekt.`);
+              }
+              if (
+                !tree.position ||
+                !Array.isArray(tree.position) ||
+                tree.position.length !== 2 ||
+                typeof tree.position[0] !== 'number' ||
+                typeof tree.position[1] !== 'number'
+              ) {
+                treeErrors.push(`Boom met index ${index}: De positie ontbreekt of is ongeldig.`);
+              }
+              if (!tree.description) {
+                treeErrors.push(`Boom met index ${index}: De beschrijving ontbreekt.`);
+              }
+              
+              if (treeErrors.length > 0) {
+                  newErrors.push(...treeErrors);
+                return false;
+              }
+              return true;
             });
+  
+            setErrors(newErrors);
   
             if (validTrees.length > 0) {
               validTrees.forEach(tree => {
-                const [latitude, longitude] = tree.position; // Split position into latitude and longitude
+                const [latitude, longitude] = tree.position;
                 data.addTree({
                   name: tree.name,
-                  description: tree.description || 'No description provided',
+                  description: tree.description || 'Geen beschrijving opgegeven',
                   latitude,
                   longitude,
                 });
               });
-              navigate('/map'); // Redirect naar de kaart
-            } else {
-              alert('The uploaded JSON must contain an array of trees with name and position.');
+              navigate('/map');
             }
-          } else {
-            alert('The uploaded JSON must be an array of trees.');
+            else if(newErrors.length === 0) {
+              setErrors(['Het JSON-bestand bevat geen geldige bomen.']);
+            }
           }
-          setError(null);
         } catch (err) {
-          setError("Er is een fout opgetreden bij het lezen van het JSON-bestand.");
+          setErrors(['Er is een fout opgetreden bij het lezen van het JSON-bestand.']);
           setFileContent(null);
         }
       };
       reader.readAsText(file);
     } else {
-      setError("Selecteer een geldig JSON-bestand.");
+      setErrors(['Selecteer een geldig JSON-bestand.']);
       setFileContent(null);
     }
   };
+  
+  
 
 
 
 
-  // Functie voor bestand uit de verkenner
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
     handleFile(file);
   };
 
-  // Functie voor bestand drag-and-drop
   const handleDrop = (event) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
@@ -145,7 +164,14 @@ function UploadView() {
             klik om een bestand te selecteren
           </label>
 
-          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
+          {errors.length > 0 && (
+          <ul style={{ color: 'red', textAlign: 'left', overflowX: 'auto'}}>
+          {errors.map((error, index) => (
+          <li key={index}>{error}</li>
+          ))}
+          </ul>
+          )}
+
 
           {fileContent && (
             <pre style={{

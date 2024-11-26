@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import React, { useState, useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import data from '../../../../shared/data';
 import 'leaflet/dist/leaflet.css';
 import Navbar from '../Navbar/Navbar';
 import "./WebMapView.css";
+import L from 'leaflet';
 import { useNavigate } from 'react-router-dom';
 import TreeDetail from '../TreeDetail/TreeDetail';
 import DynamicMarker from '../DynamicMarker/DynamicMarker';
